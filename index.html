@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DS5 Connect — DualSense를 키보드/마우스로</title>
+<meta name="description" content="DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로 매핑하는 무료 앱. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑 지원.">
+<style>
+  :root {
+    --bg: #f4f4f6;
+    --card: #ffffff;
+    --ink: #1b1e26;
+    --muted: #5b5f6b;
+    --accent: #3a96dd;
+    --accent-ink: #ffffff;
+    --footer-bg: #1c1f26;
+    --footer-ink: #e7e8ec;
+    --border: #e2e3e8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+  header.hero {
+    padding: 72px 0 48px;
+    text-align: center;
+  }
+  header.hero img.icon {
+    width: 108px;
+    height: 108px;
+    image-rendering: pixelated;
+    margin-bottom: 20px;
+  }
+  header.hero h1 {
+    font-size: 2.4rem;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  header.hero p.tagline {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+
+  .badges {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+  }
+  .badge {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+
+  .download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: var(--accent-ink);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 16px 32px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(58, 150, 221, 0.28);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .download-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(58, 150, 221, 0.35); }
+  .download-meta {
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  section { padding: 40px 0; }
+  section.shots { padding-top: 8px; }
+  .shot-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .shot-grid figure {
+    margin: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .shot-grid img { display: block; width: 100%; height: auto; }
+  .shot-grid figcaption {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    margin: 0 0 20px;
+    text-align: center;
+  }
+
+  .features {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+  }
+  .features li {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+  .features li strong { display: block; margin-bottom: 2px; }
+
+  .install-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+  }
+  .install-card ol { margin: 0; padding-left: 22px; }
+  .install-card li { margin-bottom: 14px; }
+  .install-card li:last-child { margin-bottom: 0; }
+  .install-card .note {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: #eef6fc;
+    border: 1px solid #cfe6f5;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #2c5a76;
+  }
+
+  footer {
+    background: var(--footer-bg);
+    color: var(--footer-ink);
+    padding: 32px 0;
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.85rem;
+  }
+  footer a { color: var(--footer-ink); }
+
+  @media (max-width: 620px) {
+    header.hero { padding: 48px 0 32px; }
+    header.hero h1 { font-size: 1.9rem; }
+    .shot-grid, .features { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16181d;
+      --card: #1f222a;
+      --ink: #f0f1f4;
+      --muted: #9a9daa;
+      --border: #2c2f38;
+    }
+    .install-card .note { background: #16303f; border-color: #1f4a63; color: #bcdcee; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <img class="icon" src="assets/icon.png" alt="DS5 Connect 아이콘">
+    <h1>DS5 Connect</h1>
+    <p class="tagline">DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑까지 완전 무료.</p>
+    <div class="badges">
+      <span class="badge">macOS</span>
+      <span class="badge">완전 무료</span>
+      <span class="badge">USB / 블루투스</span>
+    </div>
+    <a class="download-btn" id="download-link" href="#" download>
+      ⬇ 다운로드 (macOS)
+    </a>
+    <div class="download-meta" id="download-meta">최신 버전 · .dmg</div>
+  </header>
+
+  <section class="shots">
+    <h2>스크린샷</h2>
+    <div class="shot-grid">
+      <figure>
+        <img src="assets/control.png" alt="제어 탭 스크린샷">
+        <figcaption>제어 탭 — 시작/중지, 자이로·터치패드 마우스 켜고 끄기</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/bindings.png" alt="버튼 매핑 탭 스크린샷">
+        <figcaption>버튼 매핑 탭 — 버튼 클릭 → 키 클릭으로 즉시 매핑</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section>
+    <h2>기능</h2>
+    <ul class="features">
+      <li><strong>자이로 조준</strong>컨트롤러를 기울이면 마우스 커서로 변환</li>
+      <li><strong>터치패드 마우스</strong>트랙패드처럼 손가락으로 드래그</li>
+      <li><strong>자유 버튼 매핑</strong>버튼 클릭 → 키 클릭으로 즉시 저장</li>
+      <li><strong>세컨키(모디파이어)</strong>버튼 하나로 매핑 두 배로 확장</li>
+      <li><strong>연결 상태 실시간 감지</strong>블루투스 끊김/재연결 자동 반영</li>
+      <li><strong>한국어 / English</strong>재시작 없이 언어 전환</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>설치 방법</h2>
+    <div class="install-card">
+      <ol>
+        <li><strong>DS5 Connect.dmg</strong>를 다운로드해 연 다음, <strong>DS5 Connect.app</strong>을 <strong>Applications</strong> 폴더로 드래그하세요.</li>
+        <li>처음 실행하면 "확인되지 않은 개발자" 경고가 뜰 수 있습니다 — 개인 개발자가 배포하는 무료 앱이라 애플 정식 서명을 아직 받지 않아서 그렇습니다, 악성코드 검사와는 무관합니다.
+          <ul>
+            <li>Finder에서 앱 아이콘을 <strong>control+클릭(우클릭) → 열기</strong> → 대화상자에서 <strong>열기</strong></li>
+            <li>안 되면: <strong>시스템 설정 → 개인정보 보호 및 보안</strong> → 아래로 스크롤 → "차단됨" 옆 <strong>그래도 열기</strong> → 암호 입력</li>
+          </ul>
+        </li>
+        <li>한 번 허용하면 이후에는 경고 없이 정상 실행됩니다.</li>
+      </ol>
+      <div class="note">
+        macOS에서는 첫 실행 시 <strong>시스템 설정 → 개인정보 보호 및 보안</strong>에서 손쉬운 사용(Accessibility),
+        입력 모니터링(Input Monitoring) 권한도 허용해야 키/마우스 입력이 실제로 전달됩니다.
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  DS5 Connect · 개인 개발 프로젝트, 완전 무료 배포
+</footer>
+
+<script>
+  // Points the download button at this repo's latest GitHub Release .dmg
+  // asset, and shows the tag as the version, without hardcoding a version
+  // number that would go stale.
+  (function () {
+    var owner = "parktaeyang";
+    var repo = "ds5-connect-releases";
+    fetch("https://api.github.com/repos/" + owner + "/" + repo + "/releases/latest")
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var asset = (data.assets || []).find(function (a) {
+          return /\.dmg$/i.test(a.name);
+        });
+        if (asset) {
+          document.getElementById("download-link").href = asset.browser_download_url;
+          document.getElementById("download-meta").textContent =
+            (data.tag_name || "") + " · " + (asset.size / (1024 * 1024)).toFixed(1) + " MB";
+        }
+      })
+      .catch(function () {});
+  })();
+</script>
+
+</body>
+</html>
