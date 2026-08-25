@@ -140,6 +140,12 @@
     color: var(--muted);
   }
 
+  .feedback-intro {
+    text-align: center;
+    color: var(--muted);
+    margin: -8px 0 24px;
+  }
+
   section { padding: 40px 0; }
   section.shots { padding-top: 8px; }
   .shot-grid {
@@ -302,6 +308,12 @@
       <div class="note" data-i18n="install_note"></div>
     </div>
   </section>
+
+  <section>
+    <h2 data-i18n="feedback_heading"></h2>
+    <p class="feedback-intro" data-i18n="feedback_intro"></p>
+    <div class="giscus"></div>
+  </section>
 </div>
 
 <footer data-i18n="footer"></footer>
@@ -343,6 +355,8 @@
       install_step2_b: "안 되면: <strong>시스템 설정 → 개인정보 보호 및 보안</strong> → 아래로 스크롤 → \"차단됨\" 옆 <strong>그래도 열기</strong> → 암호 입력",
       install_step3: "한 번 허용하면 이후에는 경고 없이 정상 실행됩니다.",
       install_note: "macOS에서는 첫 실행 시 <strong>시스템 설정 → 개인정보 보호 및 보안</strong>에서 손쉬운 사용(Accessibility), 입력 모니터링(Input Monitoring) 권한도 허용해야 키/마우스 입력이 실제로 전달됩니다.",
+      feedback_heading: "피드백 / 댓글",
+      feedback_intro: "사용해보시고 의견을 남겨주세요! GitHub 계정으로 로그인하면 댓글을 작성할 수 있습니다.",
       footer: "DS5 Connect · 개인 개발 프로젝트, 완전 무료 배포"
     },
     en: {
@@ -380,6 +394,8 @@
       install_step2_b: "Still blocked? <strong>System Settings → Privacy &amp; Security</strong> → scroll down → click <strong>Open Anyway</strong> next to the blocked app → enter your password",
       install_step3: "Once allowed, it launches normally without warnings from then on.",
       install_note: "On macOS, the first time you run it you'll also need to grant Accessibility and Input Monitoring permissions in <strong>System Settings → Privacy &amp; Security</strong> for key/mouse input to actually work.",
+      feedback_heading: "Feedback / Comments",
+      feedback_intro: "Tried it out? Let me know what you think! Sign in with GitHub to leave a comment.",
       footer: "DS5 Connect · An independent project, distributed completely free"
     }
   };
@@ -406,6 +422,17 @@
     document.getElementById("lang-btn-en").classList.toggle("active", lang === "en");
 
     try { localStorage.setItem("ds5connect-lang", lang); } catch (e) {}
+
+    // Keep the embedded giscus comment widget's own UI language in sync
+    // (it renders in its own cross-origin iframe, so this has to go
+    // through postMessage rather than touching its DOM directly).
+    var giscusFrame = document.querySelector("iframe.giscus-frame");
+    if (giscusFrame) {
+      giscusFrame.contentWindow.postMessage(
+        { giscus: { setConfig: { lang: lang } } },
+        "https://giscus.app"
+      );
+    }
   }
 
   function initialLang() {
@@ -452,6 +479,29 @@
         }
       })
       .catch(function () {});
+  })();
+
+  // Loads the giscus comment widget into <div class="giscus">. Comments
+  // are stored as GitHub Discussions on this repo (Announcements category
+  // -- only maintainers can start new threads, but anyone with a GitHub
+  // account can reply, per giscus's own recommended setup).
+  (function () {
+    var script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.setAttribute("data-repo", "parktaeyang/ds5-connect-releases");
+    script.setAttribute("data-repo-id", "R_kgDOUD2GOQ");
+    script.setAttribute("data-category", "Announcements");
+    script.setAttribute("data-category-id", "DIC_kwDOUD2GOc4DEKkp");
+    script.setAttribute("data-mapping", "pathname");
+    script.setAttribute("data-strict", "0");
+    script.setAttribute("data-reactions-enabled", "1");
+    script.setAttribute("data-emit-metadata", "0");
+    script.setAttribute("data-input-position", "bottom");
+    script.setAttribute("data-theme", "preferred_color_scheme");
+    script.setAttribute("data-lang", initialLang());
+    script.crossOrigin = "anonymous";
+    script.async = true;
+    document.querySelector(".giscus").appendChild(script);
   })();
 </script>
 
