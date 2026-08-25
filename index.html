@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DS5 Connect — DualSense를 키보드/마우스로</title>
+<title data-i18n="title">DS5 Connect — DualSense를 키보드/마우스로</title>
 <meta name="description" content="DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로 매핑하는 무료 앱. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑 지원.">
 <style>
   :root {
@@ -16,6 +16,7 @@
     --footer-bg: #1c1f26;
     --footer-ink: #e7e8ec;
     --border: #e2e3e8;
+    --langbar-bg: #eef1f5;
   }
   * { box-sizing: border-box; }
   body {
@@ -27,8 +28,37 @@
   }
   .wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
 
+  .langbar {
+    background: var(--langbar-bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .langbar-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 10px 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+  .lang-btn {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .lang-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 600;
+  }
+
   header.hero {
-    padding: 72px 0 48px;
+    padding: 56px 0 48px;
     text-align: center;
   }
   header.hero img.icon {
@@ -161,7 +191,7 @@
   footer a { color: var(--footer-ink); }
 
   @media (max-width: 620px) {
-    header.hero { padding: 48px 0 32px; }
+    header.hero { padding: 40px 0 32px; }
     header.hero h1 { font-size: 1.9rem; }
     .shot-grid, .features { grid-template-columns: 1fr; }
   }
@@ -173,6 +203,7 @@
       --ink: #f0f1f4;
       --muted: #9a9daa;
       --border: #2c2f38;
+      --langbar-bg: #1c1f26;
     }
     .install-card .note { background: #16303f; border-color: #1f4a63; color: #bcdcee; }
   }
@@ -180,77 +211,188 @@
 </head>
 <body>
 
+<div class="langbar">
+  <div class="langbar-inner">
+    <button class="lang-btn" id="lang-btn-ko" onclick="setLang('ko')">한국어</button>
+    <button class="lang-btn" id="lang-btn-en" onclick="setLang('en')">English</button>
+  </div>
+</div>
+
 <div class="wrap">
   <header class="hero">
-    <img class="icon" src="assets/icon.png" alt="DS5 Connect 아이콘">
+    <img class="icon" src="assets/icon.png" data-i18n-attr="icon_alt" alt="DS5 Connect 아이콘">
     <h1>DS5 Connect</h1>
-    <p class="tagline">DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑까지 완전 무료.</p>
+    <p class="tagline" data-i18n="tagline"></p>
     <div class="badges">
       <span class="badge">macOS</span>
-      <span class="badge">완전 무료</span>
-      <span class="badge">USB / 블루투스</span>
+      <span class="badge" data-i18n="badge_free"></span>
+      <span class="badge" data-i18n="badge_usb"></span>
     </div>
-    <a class="download-btn" id="download-link" href="#" download>
-      ⬇ 다운로드 (macOS)
-    </a>
-    <div class="download-meta" id="download-meta">최신 버전 · .dmg</div>
+    <a class="download-btn" id="download-link" href="#" download data-i18n="download_btn"></a>
+    <div class="download-meta" id="download-meta" data-i18n="download_meta_default"></div>
   </header>
 
   <section class="shots">
-    <h2>스크린샷</h2>
+    <h2 data-i18n="shots_heading"></h2>
     <div class="shot-grid">
       <figure>
-        <img src="assets/control.png" alt="제어 탭 스크린샷">
-        <figcaption>제어 탭 — 시작/중지, 자이로·터치패드 마우스 켜고 끄기</figcaption>
+        <img src="assets/control.png" data-i18n-attr="shot1_alt" alt="제어 탭 스크린샷">
+        <figcaption data-i18n="shot1_caption"></figcaption>
       </figure>
       <figure>
-        <img src="assets/bindings.png" alt="버튼 매핑 탭 스크린샷">
-        <figcaption>버튼 매핑 탭 — 버튼 클릭 → 키 클릭으로 즉시 매핑</figcaption>
+        <img src="assets/bindings.png" data-i18n-attr="shot2_alt" alt="버튼 매핑 탭 스크린샷">
+        <figcaption data-i18n="shot2_caption"></figcaption>
       </figure>
     </div>
   </section>
 
   <section>
-    <h2>기능</h2>
+    <h2 data-i18n="features_heading"></h2>
     <ul class="features">
-      <li><strong>자이로 조준</strong>컨트롤러를 기울이면 마우스 커서로 변환</li>
-      <li><strong>터치패드 마우스</strong>트랙패드처럼 손가락으로 드래그</li>
-      <li><strong>자유 버튼 매핑</strong>버튼 클릭 → 키 클릭으로 즉시 저장</li>
-      <li><strong>세컨키(모디파이어)</strong>버튼 하나로 매핑 두 배로 확장</li>
-      <li><strong>연결 상태 실시간 감지</strong>블루투스 끊김/재연결 자동 반영</li>
-      <li><strong>한국어 / English</strong>재시작 없이 언어 전환</li>
+      <li><strong data-i18n="feature_gyro_title"></strong><span data-i18n="feature_gyro_desc"></span></li>
+      <li><strong data-i18n="feature_touchpad_title"></strong><span data-i18n="feature_touchpad_desc"></span></li>
+      <li><strong data-i18n="feature_bindings_title"></strong><span data-i18n="feature_bindings_desc"></span></li>
+      <li><strong data-i18n="feature_secondkey_title"></strong><span data-i18n="feature_secondkey_desc"></span></li>
+      <li><strong data-i18n="feature_reconnect_title"></strong><span data-i18n="feature_reconnect_desc"></span></li>
+      <li><strong data-i18n="feature_lang_title"></strong><span data-i18n="feature_lang_desc"></span></li>
     </ul>
   </section>
 
   <section>
-    <h2>설치 방법</h2>
+    <h2 data-i18n="install_heading"></h2>
     <div class="install-card">
       <ol>
-        <li><strong>DS5 Connect.dmg</strong>를 다운로드해 연 다음, <strong>DS5 Connect.app</strong>을 <strong>Applications</strong> 폴더로 드래그하세요.</li>
-        <li>처음 실행하면 "확인되지 않은 개발자" 경고가 뜰 수 있습니다 — 개인 개발자가 배포하는 무료 앱이라 애플 정식 서명을 아직 받지 않아서 그렇습니다, 악성코드 검사와는 무관합니다.
+        <li data-i18n="install_step1"></li>
+        <li>
+          <span data-i18n="install_step2"></span>
           <ul>
-            <li>Finder에서 앱 아이콘을 <strong>control+클릭(우클릭) → 열기</strong> → 대화상자에서 <strong>열기</strong></li>
-            <li>안 되면: <strong>시스템 설정 → 개인정보 보호 및 보안</strong> → 아래로 스크롤 → "차단됨" 옆 <strong>그래도 열기</strong> → 암호 입력</li>
+            <li data-i18n="install_step2_a"></li>
+            <li data-i18n="install_step2_b"></li>
           </ul>
         </li>
-        <li>한 번 허용하면 이후에는 경고 없이 정상 실행됩니다.</li>
+        <li data-i18n="install_step3"></li>
       </ol>
-      <div class="note">
-        macOS에서는 첫 실행 시 <strong>시스템 설정 → 개인정보 보호 및 보안</strong>에서 손쉬운 사용(Accessibility),
-        입력 모니터링(Input Monitoring) 권한도 허용해야 키/마우스 입력이 실제로 전달됩니다.
-      </div>
+      <div class="note" data-i18n="install_note"></div>
     </div>
   </section>
 </div>
 
-<footer>
-  DS5 Connect · 개인 개발 프로젝트, 완전 무료 배포
-</footer>
+<footer data-i18n="footer"></footer>
 
 <script>
+  var STRINGS = {
+    ko: {
+      title: "DS5 Connect — DualSense를 키보드/마우스로",
+      description: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로 매핑하는 무료 앱. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑 지원.",
+      icon_alt: "DS5 Connect 아이콘",
+      tagline: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑까지 완전 무료.",
+      badge_free: "완전 무료",
+      badge_usb: "USB / 블루투스",
+      download_btn: "⬇ 다운로드 (macOS)",
+      download_meta_default: "최신 버전 · .dmg",
+      shots_heading: "스크린샷",
+      shot1_alt: "제어 탭 스크린샷",
+      shot1_caption: "제어 탭 — 시작/중지, 자이로·터치패드 마우스 켜고 끄기",
+      shot2_alt: "버튼 매핑 탭 스크린샷",
+      shot2_caption: "버튼 매핑 탭 — 버튼 클릭 → 키 클릭으로 즉시 매핑",
+      features_heading: "기능",
+      feature_gyro_title: "자이로 조준",
+      feature_gyro_desc: "컨트롤러를 기울이면 마우스 커서로 변환",
+      feature_touchpad_title: "터치패드 마우스",
+      feature_touchpad_desc: "트랙패드처럼 손가락으로 드래그",
+      feature_bindings_title: "자유 버튼 매핑",
+      feature_bindings_desc: "버튼 클릭 → 키 클릭으로 즉시 저장",
+      feature_secondkey_title: "세컨키(모디파이어)",
+      feature_secondkey_desc: "버튼 하나로 매핑 두 배로 확장",
+      feature_reconnect_title: "연결 상태 실시간 감지",
+      feature_reconnect_desc: "블루투스 끊김/재연결 자동 반영",
+      feature_lang_title: "한국어 / English",
+      feature_lang_desc: "재시작 없이 언어 전환",
+      install_heading: "설치 방법",
+      install_step1: "<strong>DS5 Connect.dmg</strong>를 다운로드해 연 다음, <strong>DS5 Connect.app</strong>을 <strong>Applications</strong> 폴더로 드래그하세요.",
+      install_step2: "처음 실행하면 \"확인되지 않은 개발자\" 경고가 뜰 수 있습니다 — 개인 개발자가 배포하는 무료 앱이라 애플 정식 서명을 아직 받지 않아서 그렇습니다, 악성코드 검사와는 무관합니다.",
+      install_step2_a: "Finder에서 앱 아이콘을 <strong>control+클릭(우클릭) → 열기</strong> → 대화상자에서 <strong>열기</strong>",
+      install_step2_b: "안 되면: <strong>시스템 설정 → 개인정보 보호 및 보안</strong> → 아래로 스크롤 → \"차단됨\" 옆 <strong>그래도 열기</strong> → 암호 입력",
+      install_step3: "한 번 허용하면 이후에는 경고 없이 정상 실행됩니다.",
+      install_note: "macOS에서는 첫 실행 시 <strong>시스템 설정 → 개인정보 보호 및 보안</strong>에서 손쉬운 사용(Accessibility), 입력 모니터링(Input Monitoring) 권한도 허용해야 키/마우스 입력이 실제로 전달됩니다.",
+      footer: "DS5 Connect · 개인 개발 프로젝트, 완전 무료 배포"
+    },
+    en: {
+      title: "DS5 Connect — DualSense as Keyboard & Mouse",
+      description: "A free macOS app that maps your DualSense (PS5) controller to keyboard and mouse. Gyro aiming, touchpad mouse, fully customizable button bindings.",
+      icon_alt: "DS5 Connect icon",
+      tagline: "Turn your DualSense (PS5) controller into a keyboard and mouse on macOS. Gyro aiming, touchpad mouse, and fully customizable button bindings — completely free.",
+      badge_free: "Completely free",
+      badge_usb: "USB / Bluetooth",
+      download_btn: "⬇ Download (macOS)",
+      download_meta_default: "Latest version · .dmg",
+      shots_heading: "Screenshots",
+      shot1_alt: "Control tab screenshot",
+      shot1_caption: "Control tab — start/stop, toggle gyro & touchpad mouse",
+      shot2_alt: "Button mapping tab screenshot",
+      shot2_caption: "Button mapping tab — click a button, click a key, done",
+      features_heading: "Features",
+      feature_gyro_title: "Gyro aiming",
+      feature_gyro_desc: "Tilt the controller to move the mouse cursor",
+      feature_touchpad_title: "Touchpad mouse",
+      feature_touchpad_desc: "Drag with your finger like a trackpad",
+      feature_bindings_title: "Free button mapping",
+      feature_bindings_desc: "Click a button, click a key — saved instantly",
+      feature_secondkey_title: "Second key (modifier)",
+      feature_secondkey_desc: "One button doubles every other mapping",
+      feature_reconnect_title: "Live connection detection",
+      feature_reconnect_desc: "Bluetooth drops/reconnects reflected instantly",
+      feature_lang_title: "한국어 / English",
+      feature_lang_desc: "Switch languages without restarting",
+      install_heading: "Installation",
+      install_step1: "Download <strong>DS5 Connect.dmg</strong>, open it, then drag <strong>DS5 Connect.app</strong> into your <strong>Applications</strong> folder.",
+      install_step2: "On first launch you may see an \"unidentified developer\" warning — this app is distributed by an individual developer without an official Apple signature yet, it has nothing to do with malware.",
+      install_step2_a: "In Finder, <strong>control-click (or right-click) → Open</strong> the app icon → click <strong>Open</strong> in the dialog",
+      install_step2_b: "Still blocked? <strong>System Settings → Privacy &amp; Security</strong> → scroll down → click <strong>Open Anyway</strong> next to the blocked app → enter your password",
+      install_step3: "Once allowed, it launches normally without warnings from then on.",
+      install_note: "On macOS, the first time you run it you'll also need to grant Accessibility and Input Monitoring permissions in <strong>System Settings → Privacy &amp; Security</strong> for key/mouse input to actually work.",
+      footer: "DS5 Connect · An independent project, distributed completely free"
+    }
+  };
+
+  function setLang(lang) {
+    if (!STRINGS[lang]) lang = "ko";
+    var dict = STRINGS[lang];
+
+    document.querySelectorAll("[data-i18n]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n");
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
+      var key = el.getAttribute("data-i18n-attr");
+      if (dict[key] !== undefined) el.setAttribute("alt", dict[key]);
+    });
+
+    document.title = dict.title;
+    var descMeta = document.querySelector('meta[name="description"]');
+    if (descMeta) descMeta.setAttribute("content", dict.description);
+    document.documentElement.setAttribute("lang", lang);
+
+    document.getElementById("lang-btn-ko").classList.toggle("active", lang === "ko");
+    document.getElementById("lang-btn-en").classList.toggle("active", lang === "en");
+
+    try { localStorage.setItem("ds5connect-lang", lang); } catch (e) {}
+  }
+
+  function initialLang() {
+    try {
+      var stored = localStorage.getItem("ds5connect-lang");
+      if (stored) return stored;
+    } catch (e) {}
+    return navigator.language && navigator.language.toLowerCase().indexOf("ko") === 0 ? "ko" : "en";
+  }
+
+  setLang(initialLang());
+
   // Points the download button at this repo's latest GitHub Release .dmg
   // asset, and shows the tag as the version, without hardcoding a version
-  // number that would go stale.
+  // number that would go stale. Runs after setLang so it overwrites the
+  // placeholder download-meta text with real version/size info.
   (function () {
     var owner = "parktaeyang";
     var repo = "ds5-connect-releases";
