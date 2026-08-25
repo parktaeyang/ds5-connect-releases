@@ -79,20 +79,15 @@
     margin: 0 auto 32px;
   }
 
-  .badges {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 32px;
-  }
-  .badge {
+  .roadmap-note {
+    display: inline-block;
     background: var(--card);
     border: 1px solid var(--border);
     color: var(--muted);
     font-size: 0.85rem;
-    padding: 6px 14px;
+    padding: 8px 18px;
     border-radius: 999px;
+    margin: 0 0 32px;
   }
 
   .download-btn {
@@ -223,11 +218,7 @@
     <img class="icon" src="assets/icon.png" data-i18n-attr="icon_alt" alt="DS5 Connect 아이콘">
     <h1>DS5 Connect</h1>
     <p class="tagline" data-i18n="tagline"></p>
-    <div class="badges">
-      <span class="badge">macOS</span>
-      <span class="badge" data-i18n="badge_free"></span>
-      <span class="badge" data-i18n="badge_usb"></span>
-    </div>
+    <p class="roadmap-note" data-i18n="roadmap_note"></p>
     <a class="download-btn" id="download-link" href="#" download data-i18n="download_btn"></a>
     <div class="download-meta" id="download-meta" data-i18n="download_meta_default"></div>
   </header>
@@ -286,8 +277,7 @@
       description: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로 매핑하는 무료 앱. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑 지원.",
       icon_alt: "DS5 Connect 아이콘",
       tagline: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑까지 완전 무료.",
-      badge_free: "완전 무료",
-      badge_usb: "USB / 블루투스",
+      roadmap_note: "반응이 좋으면 윈도우버전, 닌텐도 스위치 패드 등등... 확대해 보겠습니다.",
       download_btn: "⬇ 다운로드 (macOS)",
       download_meta_default: "최신 버전 · .dmg",
       shots_heading: "스크린샷",
@@ -322,8 +312,7 @@
       description: "A free macOS app that maps your DualSense (PS5) controller to keyboard and mouse. Gyro aiming, touchpad mouse, fully customizable button bindings.",
       icon_alt: "DS5 Connect icon",
       tagline: "Turn your DualSense (PS5) controller into a keyboard and mouse on macOS. Gyro aiming, touchpad mouse, and fully customizable button bindings — completely free.",
-      badge_free: "Completely free",
-      badge_usb: "USB / Bluetooth",
+      roadmap_note: "If this gets a good response, we'll expand to a Windows version, Nintendo Switch controller support, and more...",
       download_btn: "⬇ Download (macOS)",
       download_meta_default: "Latest version · .dmg",
       shots_heading: "Screenshots",
