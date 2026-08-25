@@ -37,9 +37,11 @@
     margin: 0 auto;
     padding: 10px 24px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     gap: 6px;
   }
+  .lang-group { display: flex; gap: 6px; }
   .lang-btn {
     border: 1px solid var(--border);
     background: transparent;
@@ -54,6 +56,27 @@
     background: var(--accent);
     border-color: var(--accent);
     color: var(--accent-ink);
+    font-weight: 600;
+  }
+  .gh-star-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--ink);
+    font-size: 0.85rem;
+    padding: 5px 12px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .gh-star-btn:hover { border-color: var(--accent); }
+  .gh-star-btn .count {
+    color: var(--muted);
+    border-left: 1px solid var(--border);
+    padding-left: 8px;
+    margin-left: 2px;
     font-weight: 600;
   }
 
@@ -209,8 +232,14 @@
 
 <div class="langbar">
   <div class="langbar-inner">
-    <button class="lang-btn" id="lang-btn-ko" onclick="setLang('ko')">한국어</button>
-    <button class="lang-btn" id="lang-btn-en" onclick="setLang('en')">English</button>
+    <a class="gh-star-btn" href="https://github.com/parktaeyang/ds5-connect-releases" target="_blank" rel="noopener">
+      ★ <span data-i18n="star_label"></span>
+      <span class="count" id="star-count">–</span>
+    </a>
+    <div class="lang-group">
+      <button class="lang-btn" id="lang-btn-ko" onclick="setLang('ko')">한국어</button>
+      <button class="lang-btn" id="lang-btn-en" onclick="setLang('en')">English</button>
+    </div>
   </div>
 </div>
 
@@ -277,6 +306,7 @@
       title: "DS5 Connect — DualSense를 키보드/마우스로",
       description: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로 매핑하는 무료 앱. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑 지원.",
       icon_alt: "DS5 Connect 아이콘",
+      star_label: "GitHub에서 스타",
       tagline: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑까지 완전 무료.",
       roadmap_note: "반응이 좋으면 윈도우버전, 닌텐도 스위치 패드 등등... 확대해 보겠습니다.",
       download_btn: "⬇ 다운로드 (macOS)",
@@ -312,6 +342,7 @@
       title: "DS5 Connect — DualSense as Keyboard & Mouse",
       description: "A free macOS app that maps your DualSense (PS5) controller to keyboard and mouse. Gyro aiming, touchpad mouse, fully customizable button bindings.",
       icon_alt: "DS5 Connect icon",
+      star_label: "Star on GitHub",
       tagline: "Turn your DualSense (PS5) controller into a keyboard and mouse on macOS. Gyro aiming, touchpad mouse, and fully customizable button bindings — completely free.",
       roadmap_note: "If this gets a good response, we'll expand to a Windows version, Nintendo Switch controller support, and more...",
       download_btn: "⬇ Download (macOS)",
@@ -396,6 +427,20 @@
           document.getElementById("download-link").href = asset.browser_download_url;
           document.getElementById("download-meta").textContent =
             (data.tag_name || "") + " · " + (asset.size / (1024 * 1024)).toFixed(1) + " MB";
+        }
+      })
+      .catch(function () {});
+  })();
+
+  // Live GitHub star count on the "Star on GitHub" button.
+  (function () {
+    var owner = "parktaeyang";
+    var repo = "ds5-connect-releases";
+    fetch("https://api.github.com/repos/" + owner + "/" + repo)
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        if (typeof data.stargazers_count === "number") {
+          document.getElementById("star-count").textContent = data.stargazers_count;
         }
       })
       .catch(function () {});
