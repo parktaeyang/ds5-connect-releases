@@ -256,6 +256,25 @@
     color: #2c5a76;
   }
 
+  .changelog { display: flex; flex-direction: column; gap: 16px; }
+  .release {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 24px;
+  }
+  .release-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .release-tag { font-weight: 700; font-size: 1rem; color: var(--accent); }
+  .release-date { font-size: 0.8rem; color: var(--muted); }
+  .release ul { margin: 0; padding-left: 20px; }
+  .release li { font-size: 0.92rem; margin-bottom: 6px; }
+  .release li:last-child { margin-bottom: 0; }
+
   footer {
     background: var(--footer-bg);
     color: var(--footer-ink);
@@ -357,6 +376,26 @@
   </section>
 
   <section>
+    <h2 data-i18n="changelog_heading"></h2>
+    <div class="changelog">
+      <div class="release">
+        <div class="release-head">
+          <span class="release-tag">v1.1.0</span>
+          <span class="release-date">2026-08-31</span>
+        </div>
+        <ul data-i18n="changelog_v1_1_0"></ul>
+      </div>
+      <div class="release">
+        <div class="release-head">
+          <span class="release-tag">v1.0.0</span>
+          <span class="release-date">2026-08-25</span>
+        </div>
+        <ul data-i18n="changelog_v1_0_0"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
     <h2 data-i18n="feedback_heading"></h2>
     <p class="feedback-intro" data-i18n="feedback_intro"></p>
     <div class="giscus"></div>
@@ -374,7 +413,7 @@
       star_label: "GitHub에서 스타",
       star_ask: "맘에 든다면 깃헙스타 한번 눌러주세요. 깃헙스타 많이 받는게 소원이예요 🌟",
       tagline: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑까지 완전 무료.",
-      soon_note: "🕹️ 스틱(아날로그 스틱) 관련 기능 조만간 추가 예정",
+      soon_note: "🕹️ v1.1.0 — 스틱 방향 키 매핑 기능 추가됨",
       roadmap_note: "반응이 좋으면 윈도우버전, 닌텐도 스위치 패드 등등... 확대해 보겠습니다.",
       download_btn: "⬇ 다운로드 (macOS)",
       download_meta_default: "최신 버전 · .dmg",
@@ -403,6 +442,9 @@
       install_step2_b: "안 되면: <strong>시스템 설정 → 개인정보 보호 및 보안</strong> → 아래로 스크롤 → \"차단됨\" 옆 <strong>그래도 열기</strong> → 암호 입력",
       install_step3: "한 번 허용하면 이후에는 경고 없이 정상 실행됩니다.",
       install_note: "macOS에서는 첫 실행 시 <strong>시스템 설정 → 개인정보 보호 및 보안</strong>에서 손쉬운 사용(Accessibility), 입력 모니터링(Input Monitoring) 권한도 허용해야 키/마우스 입력이 실제로 전달됩니다.",
+      changelog_heading: "버전별 변경 내용",
+      changelog_v1_1_0: "<li><strong>스틱 방향 키 매핑</strong> 추가 — 왼쪽(L3)·오른쪽(R3) 스틱의 ▲▼◀▶ 방향에 각각 키를 지정할 수 있습니다. 스틱별로 <strong>대각선 이동 허용</strong> 옵션도 제공합니다.</li>",
+      changelog_v1_0_0: "<li>첫 공개 릴리스 — 자이로 조준, 터치패드 마우스, 자유 버튼 매핑, 세컨키(모디파이어), 연결 상태 실시간 감지, 한국어/English 지원.</li>",
       feedback_heading: "피드백 / 댓글",
       feedback_intro: "사용해보시고 의견을 남겨주세요! GitHub 계정으로 로그인하면 댓글을 작성할 수 있습니다.",
       footer: "DS5 Connect · 개인 개발 프로젝트, 완전 무료 배포"
@@ -414,7 +456,7 @@
       star_label: "Star on GitHub",
       star_ask: "If you like it, please hit the GitHub star button. Getting lots of stars is kind of my dream here 🌟",
       tagline: "Turn your DualSense (PS5) controller into a keyboard and mouse on macOS. Gyro aiming, touchpad mouse, and fully customizable button bindings — completely free.",
-      soon_note: "🕹️ Analog stick features coming soon",
+      soon_note: "🕹️ v1.1.0 — stick direction key mapping added",
       roadmap_note: "If this gets a good response, we'll expand to a Windows version, Nintendo Switch controller support, and more...",
       download_btn: "⬇ Download (macOS)",
       download_meta_default: "Latest version · .dmg",
@@ -443,6 +485,9 @@
       install_step2_b: "Still blocked? <strong>System Settings → Privacy &amp; Security</strong> → scroll down → click <strong>Open Anyway</strong> next to the blocked app → enter your password",
       install_step3: "Once allowed, it launches normally without warnings from then on.",
       install_note: "On macOS, the first time you run it you'll also need to grant Accessibility and Input Monitoring permissions in <strong>System Settings → Privacy &amp; Security</strong> for key/mouse input to actually work.",
+      changelog_heading: "Changelog",
+      changelog_v1_1_0: "<li><strong>Stick direction key mapping</strong> added — bind a key to each of the ▲▼◀▶ directions on the left (L3) and right (R3) sticks. Each stick also has an <strong>Allow diagonal movement</strong> option.</li>",
+      changelog_v1_0_0: "<li>First public release — gyro aiming, touchpad mouse, free button mapping, second key (modifier), live connection detection, 한국어/English.</li>",
       feedback_heading: "Feedback / Comments",
       feedback_intro: "Tried it out? Let me know what you think! Sign in with GitHub to leave a comment.",
       footer: "DS5 Connect · An independent project, distributed completely free"
