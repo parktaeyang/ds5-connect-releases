@@ -255,6 +255,11 @@
     font-size: 0.9rem;
     color: #2c5a76;
   }
+  .install-card .note.update {
+    background: #fdf4e3;
+    border-color: #f0dcae;
+    color: #7a5a1e;
+  }
 
   .changelog { display: flex; flex-direction: column; gap: 16px; }
   .release {
@@ -301,6 +306,7 @@
       --langbar-bg: #1c1f26;
     }
     .install-card .note { background: #16303f; border-color: #1f4a63; color: #bcdcee; }
+    .install-card .note.update { background: #3a2f18; border-color: #5c4a22; color: #e6d3a8; }
   }
 </style>
 </head>
@@ -372,6 +378,7 @@
         <li data-i18n="install_step3"></li>
       </ol>
       <div class="note" data-i18n="install_note"></div>
+      <div class="note update" data-i18n="install_update_note"></div>
     </div>
   </section>
 
@@ -442,6 +449,7 @@
       install_step2_b: "안 되면: <strong>시스템 설정 → 개인정보 보호 및 보안</strong> → 아래로 스크롤 → \"차단됨\" 옆 <strong>그래도 열기</strong> → 암호 입력",
       install_step3: "한 번 허용하면 이후에는 경고 없이 정상 실행됩니다.",
       install_note: "macOS에서는 첫 실행 시 <strong>시스템 설정 → 개인정보 보호 및 보안</strong>에서 손쉬운 사용(Accessibility), 입력 모니터링(Input Monitoring) 권한도 허용해야 키/마우스 입력이 실제로 전달됩니다.",
+      install_update_note: "⚠️ <strong>새 버전으로 업데이트할 때:</strong> macOS는 앱이 새 버전으로 바뀌면 손쉬운 사용·입력 모니터링 권한을 자동으로 이어받지 못합니다(정식 애플 서명이 없어 매 빌드마다 다른 앱으로 인식됨). 새 버전에서 <strong>컨트롤러는 연결되는데 키 입력이 전혀 안 되면</strong>, <strong>시스템 설정 → 개인정보 보호 및 보안 → 손쉬운 사용</strong>에서 기존 \"DS5 Connect\" 항목을 <strong>–</strong> 버튼으로 지우고, 새 <strong>DS5 Connect.app</strong>을 다시 추가한 뒤 켜세요. 입력 모니터링 목록도 똑같이 해줍니다. 그런 다음 앱을 완전히 종료(⌘Q)했다가 다시 실행하면 됩니다.",
       changelog_heading: "버전별 변경 내용",
       changelog_v1_1_0: "<li><strong>스틱 방향 키 매핑</strong> 추가 — 왼쪽(L3)·오른쪽(R3) 스틱의 ▲▼◀▶ 방향에 각각 키를 지정할 수 있습니다. 스틱별로 <strong>대각선 이동 허용</strong> 옵션도 제공합니다.</li>",
       changelog_v1_0_0: "<li>첫 공개 릴리스 — 자이로 조준, 터치패드 마우스, 자유 버튼 매핑, 세컨키(모디파이어), 연결 상태 실시간 감지, 한국어/English 지원.</li>",
@@ -485,6 +493,7 @@
       install_step2_b: "Still blocked? <strong>System Settings → Privacy &amp; Security</strong> → scroll down → click <strong>Open Anyway</strong> next to the blocked app → enter your password",
       install_step3: "Once allowed, it launches normally without warnings from then on.",
       install_note: "On macOS, the first time you run it you'll also need to grant Accessibility and Input Monitoring permissions in <strong>System Settings → Privacy &amp; Security</strong> for key/mouse input to actually work.",
+      install_update_note: "⚠️ <strong>When updating to a new version:</strong> macOS does not carry Accessibility / Input Monitoring permission over to a new build (without an official Apple signature, each build is seen as a different app). If a new version <strong>connects to the controller but no key input comes through</strong>, open <strong>System Settings → Privacy &amp; Security → Accessibility</strong>, remove the existing \"DS5 Connect\" entry with the <strong>–</strong> button, then add the new <strong>DS5 Connect.app</strong> and enable it. Do the same in the Input Monitoring list. Then fully quit the app (⌘Q) and relaunch.",
       changelog_heading: "Changelog",
       changelog_v1_1_0: "<li><strong>Stick direction key mapping</strong> added — bind a key to each of the ▲▼◀▶ directions on the left (L3) and right (R3) sticks. Each stick also has an <strong>Allow diagonal movement</strong> option.</li>",
       changelog_v1_0_0: "<li>First public release — gyro aiming, touchpad mouse, free button mapping, second key (modifier), live connection detection, 한국어/English.</li>",
