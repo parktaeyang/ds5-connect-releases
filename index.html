@@ -160,6 +160,13 @@
     margin: 0 auto 32px;
   }
 
+  .download-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  .download-col { display: flex; flex-direction: column; align-items: center; }
   .download-btn {
     display: inline-flex;
     align-items: center;
@@ -175,6 +182,14 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .download-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(58, 150, 221, 0.35); }
+  .download-btn.disabled {
+    background: var(--border);
+    color: var(--muted);
+    box-shadow: none;
+    pointer-events: none;
+    cursor: default;
+  }
+  .download-btn.disabled:hover { transform: none; box-shadow: none; }
   .download-meta {
     margin-top: 12px;
     font-size: 0.85rem;
@@ -236,6 +251,14 @@
     font-size: 0.95rem;
   }
   .features li strong { display: block; margin-bottom: 2px; }
+
+  h3.os-subheading {
+    font-size: 1.05rem;
+    color: var(--muted);
+    text-align: center;
+    margin: 0 0 12px;
+  }
+  h3.os-subheading:not(:first-of-type) { margin-top: 28px; }
 
   .install-card {
     background: var(--card);
@@ -332,8 +355,16 @@
     <p class="tagline" data-i18n="tagline"></p>
     <p class="soon-note" data-i18n="soon_note"></p>
     <p class="roadmap-note" data-i18n="roadmap_note"></p>
-    <a class="download-btn" id="download-link" href="#" download data-i18n="download_btn"></a>
-    <div class="download-meta" id="download-meta" data-i18n="download_meta_default"></div>
+    <div class="download-row">
+      <div class="download-col">
+        <a class="download-btn" id="download-link-mac" href="#" download data-i18n="download_btn_mac"></a>
+        <div class="download-meta" id="download-meta-mac" data-i18n="download_meta_default"></div>
+      </div>
+      <div class="download-col">
+        <a class="download-btn disabled" id="download-link-win" href="#" aria-disabled="true" data-i18n="download_btn_win"></a>
+        <div class="download-meta" id="download-meta-win" data-i18n="download_meta_win_pending"></div>
+      </div>
+    </div>
     <p class="star-ask" data-i18n="star_ask"></p>
   </header>
 
@@ -365,6 +396,7 @@
 
   <section>
     <h2 data-i18n="install_heading"></h2>
+    <h3 class="os-subheading" data-i18n="install_mac_subheading"></h3>
     <div class="install-card">
       <ol>
         <li data-i18n="install_step1"></li>
@@ -379,6 +411,16 @@
       </ol>
       <div class="note" data-i18n="install_note"></div>
       <div class="note update" data-i18n="install_update_note"></div>
+    </div>
+
+    <h3 class="os-subheading" data-i18n="install_win_subheading"></h3>
+    <div class="install-card">
+      <ol>
+        <li data-i18n="install_win_step1"></li>
+        <li data-i18n="install_win_step2"></li>
+        <li data-i18n="install_win_step3"></li>
+      </ol>
+      <div class="note" data-i18n="install_win_note"></div>
     </div>
   </section>
 
@@ -420,10 +462,12 @@
       star_label: "GitHub에서 스타",
       star_ask: "맘에 든다면 깃헙스타 한번 눌러주세요. 깃헙스타 많이 받는게 소원이예요 🌟",
       tagline: "DualSense(PS5) 컨트롤러를 macOS에서 키보드+마우스로. 자이로 조준, 터치패드 마우스, 자유로운 버튼 매핑까지 완전 무료.",
-      soon_note: "🕹️ v1.1.0 — 스틱 방향 키 매핑 기능 추가됨",
-      roadmap_note: "반응이 좋으면 윈도우버전, 닌텐도 스위치 패드 등등... 확대해 보겠습니다.",
-      download_btn: "⬇ 다운로드 (macOS)",
-      download_meta_default: "최신 버전 · .dmg",
+      soon_note: "🖥️ v1.1.0 — macOS Universal 2(Apple Silicon + Intel) 지원 추가됨",
+      roadmap_note: "Windows 버전은 현재 개발 중입니다 (곧 공개 예정). 닌텐도 스위치 패드 등은 반응이 좋으면 이어서 검토해보겠습니다.",
+      download_btn_mac: "⬇ 다운로드 (macOS)",
+      download_btn_win: "⬇ 다운로드 (Windows) · 준비 중",
+      download_meta_default: "최신 버전 · Apple Silicon + Intel · .dmg",
+      download_meta_win_pending: "준비 중",
       shots_heading: "스크린샷",
       shot1_alt: "제어 탭 스크린샷",
       shot1_caption: "제어 탭 — 시작/중지, 자이로·터치패드 마우스 켜고 끄기",
@@ -443,6 +487,7 @@
       feature_lang_title: "한국어 / English",
       feature_lang_desc: "재시작 없이 언어 전환",
       install_heading: "설치 방법",
+      install_mac_subheading: "macOS (Apple Silicon & Intel)",
       install_step1: "<strong>DS5 Connect.dmg</strong>를 다운로드해 연 다음, <strong>DS5 Connect.app</strong>을 <strong>Applications</strong> 폴더로 드래그하세요.",
       install_step2: "처음 실행하면 \"확인되지 않은 개발자\" 경고가 뜰 수 있습니다 — 개인 개발자가 배포하는 무료 앱이라 애플 정식 서명을 아직 받지 않아서 그렇습니다, 악성코드 검사와는 무관합니다.",
       install_step2_a: "Finder에서 앱 아이콘을 <strong>control+클릭(우클릭) → 열기</strong> → 대화상자에서 <strong>열기</strong>",
@@ -450,8 +495,13 @@
       install_step3: "한 번 허용하면 이후에는 경고 없이 정상 실행됩니다.",
       install_note: "macOS에서는 첫 실행 시 <strong>시스템 설정 → 개인정보 보호 및 보안</strong>에서 손쉬운 사용(Accessibility), 입력 모니터링(Input Monitoring) 권한도 허용해야 키/마우스 입력이 실제로 전달됩니다.",
       install_update_note: "⚠️ <strong>새 버전으로 업데이트할 때:</strong> macOS는 앱이 새 버전으로 바뀌면 손쉬운 사용·입력 모니터링 권한을 자동으로 이어받지 못합니다(정식 애플 서명이 없어 매 빌드마다 다른 앱으로 인식됨). 새 버전에서 <strong>컨트롤러는 연결되는데 키 입력이 전혀 안 되면</strong>, <strong>시스템 설정 → 개인정보 보호 및 보안 → 손쉬운 사용</strong>에서 기존 \"DS5 Connect\" 항목을 <strong>–</strong> 버튼으로 지우고, 새 <strong>DS5 Connect.app</strong>을 다시 추가한 뒤 켜세요. 입력 모니터링 목록도 똑같이 해줍니다. 그런 다음 앱을 완전히 종료(⌘Q)했다가 다시 실행하면 됩니다.",
+      install_win_subheading: "Windows (준비 중)",
+      install_win_step1: "<strong>DS5 Connect-windows.zip</strong>을 다운로드해 압축을 풀고, <strong>DS5 Connect.exe</strong>를 실행하세요.",
+      install_win_step2: "처음 실행하면 Windows Defender SmartScreen이 \"Windows에서 PC를 보호했습니다\" 경고를 띄울 수 있습니다 — <strong>추가 정보</strong> → <strong>실행</strong>을 누르세요. 정식 코드서명 인증서가 아직 없어서 뜨는 경고이며, 악성코드 검사와는 무관합니다.",
+      install_win_step3: "관리자 권한으로 실행 중인 게임에 입력을 보내려면 DS5 Connect도 관리자 권한으로 실행해야 합니다.",
+      install_win_note: "Windows는 macOS와 달리 별도 권한 설정이 필요 없습니다 — 실행하면 바로 동작합니다.",
       changelog_heading: "버전별 변경 내용",
-      changelog_v1_1_0: "<li><strong>스틱 방향 키 매핑</strong> 추가 — 왼쪽(L3)·오른쪽(R3) 스틱의 ▲▼◀▶ 방향에 각각 키를 지정할 수 있습니다. 스틱별로 <strong>대각선 이동 허용</strong> 옵션도 제공합니다.</li>",
+      changelog_v1_1_0: "<li><strong>스틱 방향 키 매핑</strong> 추가 — 왼쪽(L3)·오른쪽(R3) 스틱의 ▲▼◀▶ 방향에 각각 키를 지정할 수 있습니다. 스틱별로 <strong>대각선 이동 허용</strong> 옵션도 제공합니다.</li><li><strong>macOS Universal 2 지원</strong> 추가 (2026-09-13) — 같은 <code>.dmg</code>가 Apple Silicon과 Intel Mac 모두에서 실행됩니다.</li>",
       changelog_v1_0_0: "<li>첫 공개 릴리스 — 자이로 조준, 터치패드 마우스, 자유 버튼 매핑, 세컨키(모디파이어), 연결 상태 실시간 감지, 한국어/English 지원.</li>",
       feedback_heading: "피드백 / 댓글",
       feedback_intro: "사용해보시고 의견을 남겨주세요! GitHub 계정으로 로그인하면 댓글을 작성할 수 있습니다.",
@@ -464,10 +514,12 @@
       star_label: "Star on GitHub",
       star_ask: "If you like it, please hit the GitHub star button. Getting lots of stars is kind of my dream here 🌟",
       tagline: "Turn your DualSense (PS5) controller into a keyboard and mouse on macOS. Gyro aiming, touchpad mouse, and fully customizable button bindings — completely free.",
-      soon_note: "🕹️ v1.1.0 — stick direction key mapping added",
-      roadmap_note: "If this gets a good response, we'll expand to a Windows version, Nintendo Switch controller support, and more...",
-      download_btn: "⬇ Download (macOS)",
-      download_meta_default: "Latest version · .dmg",
+      soon_note: "🖥️ v1.1.0 — macOS Universal 2 (Apple Silicon + Intel) support added",
+      roadmap_note: "A Windows version is currently in development (coming soon). Nintendo Switch controller support and more may follow if there's good interest.",
+      download_btn_mac: "⬇ Download (macOS)",
+      download_btn_win: "⬇ Download (Windows) · Coming soon",
+      download_meta_default: "Latest version · Apple Silicon + Intel · .dmg",
+      download_meta_win_pending: "Coming soon",
       shots_heading: "Screenshots",
       shot1_alt: "Control tab screenshot",
       shot1_caption: "Control tab — start/stop, toggle gyro & touchpad mouse",
@@ -487,6 +539,7 @@
       feature_lang_title: "한국어 / English",
       feature_lang_desc: "Switch languages without restarting",
       install_heading: "Installation",
+      install_mac_subheading: "macOS (Apple Silicon & Intel)",
       install_step1: "Download <strong>DS5 Connect.dmg</strong>, open it, then drag <strong>DS5 Connect.app</strong> into your <strong>Applications</strong> folder.",
       install_step2: "On first launch you may see an \"unidentified developer\" warning — this app is distributed by an individual developer without an official Apple signature yet, it has nothing to do with malware.",
       install_step2_a: "In Finder, <strong>control-click (or right-click) → Open</strong> the app icon → click <strong>Open</strong> in the dialog",
@@ -494,8 +547,13 @@
       install_step3: "Once allowed, it launches normally without warnings from then on.",
       install_note: "On macOS, the first time you run it you'll also need to grant Accessibility and Input Monitoring permissions in <strong>System Settings → Privacy &amp; Security</strong> for key/mouse input to actually work.",
       install_update_note: "⚠️ <strong>When updating to a new version:</strong> macOS does not carry Accessibility / Input Monitoring permission over to a new build (without an official Apple signature, each build is seen as a different app). If a new version <strong>connects to the controller but no key input comes through</strong>, open <strong>System Settings → Privacy &amp; Security → Accessibility</strong>, remove the existing \"DS5 Connect\" entry with the <strong>–</strong> button, then add the new <strong>DS5 Connect.app</strong> and enable it. Do the same in the Input Monitoring list. Then fully quit the app (⌘Q) and relaunch.",
+      install_win_subheading: "Windows (coming soon)",
+      install_win_step1: "Download <strong>DS5 Connect-windows.zip</strong>, unzip it, and run <strong>DS5 Connect.exe</strong>.",
+      install_win_step2: "On first launch, Windows Defender SmartScreen may show \"Windows protected your PC\" — click <strong>More info</strong> → <strong>Run anyway</strong>. This is because there's no official code-signing certificate yet, not a malware warning.",
+      install_win_step3: "If the game you're mapping to runs as administrator, launch DS5 Connect as administrator too, or its input won't reach it.",
+      install_win_note: "Unlike macOS, Windows needs no extra permission setup — it works as soon as you run it.",
       changelog_heading: "Changelog",
-      changelog_v1_1_0: "<li><strong>Stick direction key mapping</strong> added — bind a key to each of the ▲▼◀▶ directions on the left (L3) and right (R3) sticks. Each stick also has an <strong>Allow diagonal movement</strong> option.</li>",
+      changelog_v1_1_0: "<li><strong>Stick direction key mapping</strong> added — bind a key to each of the ▲▼◀▶ directions on the left (L3) and right (R3) sticks. Each stick also has an <strong>Allow diagonal movement</strong> option.</li><li><strong>macOS Universal 2 support</strong> added (2026-09-13) — the same <code>.dmg</code> now runs on both Apple Silicon and Intel Macs.</li>",
       changelog_v1_0_0: "<li>First public release — gyro aiming, touchpad mouse, free button mapping, second key (modifier), live connection detection, 한국어/English.</li>",
       feedback_heading: "Feedback / Comments",
       feedback_intro: "Tried it out? Let me know what you think! Sign in with GitHub to leave a comment.",
@@ -548,23 +606,40 @@
 
   setLang(initialLang());
 
-  // Points the download button at this repo's latest GitHub Release .dmg
-  // asset, and shows the tag as the version, without hardcoding a version
+  // Points both download buttons at this repo's latest GitHub Release
+  // assets, and shows the tag as the version, without hardcoding a version
   // number that would go stale. Runs after setLang so it overwrites the
   // placeholder download-meta text with real version/size info.
+  //
+  // The Windows button stays disabled (see the "disabled" class in the
+  // HTML) until a .zip/.exe asset actually shows up in the release -- there
+  // is no Windows build yet as of 2026-09-13 (see local-notes/설명서/
+  // windows-빌드.md), so this must never point at a link that 404s.
   (function () {
     var owner = "parktaeyang";
     var repo = "ds5-connect-releases";
     fetch("https://api.github.com/repos/" + owner + "/" + repo + "/releases/latest")
       .then(function (r) { return r.json(); })
       .then(function (data) {
-        var asset = (data.assets || []).find(function (a) {
-          return /\.dmg$/i.test(a.name);
-        });
-        if (asset) {
-          document.getElementById("download-link").href = asset.browser_download_url;
-          document.getElementById("download-meta").textContent =
-            (data.tag_name || "") + " · " + (asset.size / (1024 * 1024)).toFixed(1) + " MB";
+        var assets = data.assets || [];
+        var tag = data.tag_name || "";
+
+        var macAsset = assets.find(function (a) { return /\.dmg$/i.test(a.name); });
+        if (macAsset) {
+          document.getElementById("download-link-mac").href = macAsset.browser_download_url;
+          document.getElementById("download-meta-mac").textContent =
+            tag + " · " + (macAsset.size / (1024 * 1024)).toFixed(1) + " MB";
+        }
+
+        var winAsset = assets.find(function (a) { return /\.(zip|exe)$/i.test(a.name); });
+        var winLink = document.getElementById("download-link-win");
+        if (winAsset) {
+          winLink.href = winAsset.browser_download_url;
+          winLink.setAttribute("download", "");
+          winLink.classList.remove("disabled");
+          winLink.removeAttribute("aria-disabled");
+          document.getElementById("download-meta-win").textContent =
+            tag + " · " + (winAsset.size / (1024 * 1024)).toFixed(1) + " MB";
         }
       })
       .catch(function () {});
